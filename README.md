@@ -396,17 +396,17 @@ Parses user-provided (DB) list of Apple Software Update CatalogURL .sucatalog li
 
 First, you need to familiarize a bit with the DB (i.e. Apple_EFI_Grab.dat file). It consists of 3 sections: Last run DateTime (YYYY-MM-DD HH:MM:SS), Sucatalog links to check and EFI Package links which have been gathered so far across all runs. Before running the utility for the fist time, you need to insert the Sucatalog links into the DB, below the 1st line (DateTime). The Sucatalog links in the DB are stored in partial form, starting from "index" string. For example: "https://swscan.apple.com/content/catalogs/others/index-12.merged-1.sucatalog" must be stored as "index-12.merged-1.sucatalog" in the DB. The Sucatalog links are not pre-included in the DB but you can find them online (e.g. https://github.com/zhangyoufu/swscan.apple.com/blob/master/url.txt).
 
-#### **Download**
-
-An already built/frozen/compiled binary is provided by me for Windows only. Thus, **you don't need to manually build/freeze/compile it under Windows**. Instead, download the latest version from the [Releases](https://github.com/platomav/BIOSUtilities/releases) tab. To extract the already built/frozen/compiled archive, you need to use programs which support RAR5 compression. Note that you need to manually apply any prerequisites.
-
 #### **Compatibility**
 
-Should work at all Windows, Linux or macOS operating systems which have Python 3.7 support. Windows users who plan to use the already built/frozen/compiled binary must make sure that they have the latest Windows Updates installed which include all required "Universal C Runtime (CRT)" libraries.
+Should work at all Windows, Linux or macOS operating systems which have Python 3.7 support.
 
 #### **Prerequisites**
 
-To run the utility, you do not need any 3rd party tool.
+To run the python script, you need to have the following 3rd party Python module installed:
+
+* [pefile](https://pypi.org/project/urllib3/)
+
+> pip3 install urllib3
 
 #### **Build/Freeze/Compile with PyInstaller**
 
@@ -420,7 +420,11 @@ PyInstaller can build/freeze/compile the utility at all three supported platform
 
 > pip3 install pyinstaller
 
-3. Build/Freeze/Compile:
+3. Use pip to install urllib3:
+
+> pip3 install urllib3
+
+4. Build/Freeze/Compile:
 
 > pyinstaller --noupx --onefile Apple_EFI_Grab.py
 

@@ -4,10 +4,10 @@
 """
 Apple EFI Grab
 Apple EFI Package Grabber
-Copyright (C) 2018-2021 Plato Mavropoulos
+Copyright (C) 2018-2022 Plato Mavropoulos
 """
 
-title = 'Apple EFI Package Grabber v2.0'
+title = 'Apple EFI Package Grabber v2.1'
 
 print('\n' + title)
 
@@ -33,25 +33,26 @@ def show_exception_and_exit(exc_type, exc_value, tb):
 
 sys.excepthook = show_exception_and_exit
 
+import urllib3
 import datetime
-import urllib.request
 from multiprocessing.pool import ThreadPool
 
 def fetch_cat_info(name):
     url = cat_url[:-len('others/')] + name if name in ['index.sucatalog','index-1.sucatalog'] else cat_url + name
-    with urllib.request.urlopen(urllib.request.Request(url, method='HEAD')) as head : mod = head.headers['last-modified']
+    
+    mod = urllib3.PoolManager().request('HEAD', url, retries=10).headers['Last-Modified']
     
     return name, url, mod
 
 def fetch_cat_links(cat_file):
     cat_links = []
     
-    with urllib.request.urlopen(cat_file[1]) as link: fdata = link.readlines()
+    fdata = urllib3.PoolManager().request('GET', cat_file[1], retries=10).data
     
-    cat_lines = [l.decode('utf-8').strip('\n') for l in fdata]
+    cat_lines = [l.strip() for l in fdata.decode('utf-8','ignore').split('\n')]
     
     for line in cat_lines:
-        if ('.pkg' in line or '.tar' in line) and ('FirmwareUpd' in line or '/BridgeOSUpdateCustomer' in line or 'EFIUpd' in line) \
+        if 'http' in line and ('.pkg' in line or '.tar' in line) and ('FirmwareUpd' in line or '/BridgeOSUpdateCustomer' in line or 'EFIUpd' in line) \
         and 'Bluetooth' not in line and 'DPVGA' not in line and 'Thunderbolt' not in line and 'PMG5' not in line and 'HardDrive' not in line:
             down_link = line[line.find('http'):(line.find('.pkg') if '.pkg' in line else line.find('.tar')) + 4]
             down_link = down_link.replace('http:','https:')
@@ -64,7 +65,7 @@ cat_url = 'https://swscan.apple.com/content/catalogs/others/'
 apple_cat = []
 down_links = []
 svr_date = None
-thread_num = 2
+thread_num = 1
 
 with open(dat_db, 'r', encoding='utf-8') as dat: db_lines = dat.readlines()
 db_lines = [line.strip('\n') for line in db_lines]
@@ -81,7 +82,7 @@ if not db_sucat:
 
 apple_mod = ThreadPool(thread_num).imap_unordered(fetch_cat_info, db_sucat)
 
-for name, url, mod in apple_mod:
+for name,url,mod in apple_mod:
     dt = datetime.datetime.strptime(mod, '%a, %d %b %Y %H:%M:%S %Z')
     if not svr_date or dt > svr_date : svr_date = dt
     
@@ -101,6 +102,7 @@ if svr_date <= db_date:
 print('\nGetting Catalog Links...')
 
 down_links = ThreadPool(thread_num).imap_unordered(fetch_cat_links, apple_cat)
+
 down_links = [item for sublist in down_links for item in sublist]
 
 if not down_links:
