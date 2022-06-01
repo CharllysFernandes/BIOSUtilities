@@ -5,14 +5,14 @@
 
 <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=DJDZD3PRGCSCL"><img border="0" title="BIOS Utilities Donation via Paypal or Debit/Credit Card" alt="BIOS Utilities Donation via Paypal or Debit/Credit Card" src="https://user-images.githubusercontent.com/11527726/109392268-e0f68280-7923-11eb-83d8-0a63f0d20783.png"></a>
 
-* [**Dell PFS Update Extractor**](#dell-pfs-update-extractor)
-* [**AMI UCP BIOS Extractor**](#ami-ucp-bios-extractor)
-* [**AMI BIOS Guard Extractor**](#ami-bios-guard-extractor)
-* [**Phoenix SCT BIOS Extractor**](#phoenix-sct-bios-extractor)
+* [**Dell PFS Update Extractor**](#dell-pfs-update-extractor) [use Dell_PFS_Extract from refactor branch]
+* [**AMI UCP BIOS Extractor**](#ami-ucp-bios-extractor) [use AMI_UCP_Extract from refactor branch]
+* [**AMI BIOS Guard Extractor**](#ami-bios-guard-extractor) [use AMI_PFAT_Extract from refactor branch]
+* [**Phoenix SCT BIOS Extractor**](#phoenix-sct-bios-extractor) [use Phoenix_TDK_Extract from refactor branch]
 * [**Insyde iFlash Image Extractor**](#insyde-iflash-image-extractor)
-* [**Portwell EFI BIOS Extractor**](#portwell-efi-bios-extractor)
+* [**Portwell EFI BIOS Extractor**](#portwell-efi-bios-extractor) [use Portwell_EFI_Extract from refactor branch]
 * [**Panasonic BIOS Update Extractor**](#panasonic-bios-update-extractor)
-* [**VAIO Packaging Manager Extractor**](#vaio-packaging-manager-extractor)
+* [**VAIO Packaging Manager Extractor**](#vaio-packaging-manager-extractor) [use VAIO_Package_Extract from refactor branch]
 * [**Fujitsu UPC BIOS Extractor**](#fujitsu-upc-bios-extractor)
 * [**Fujitsu SFX BIOS Extractor**](#fujitsu-sfx-bios-extractor)
 * [**Award BIOS Module Extractor**](#award-bios-module-extractor)
@@ -24,6 +24,10 @@
 ## **Dell PFS Update Extractor**
 
 ![](https://i.imgur.com/5WaGPPl.png)
+
+#### **!!! OUTDATED !!!**
+
+[Please use Dell_PFS_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
 
 #### **Description**
 
@@ -94,6 +98,10 @@ Some Anti-Virus software may claim that the built/frozen/compiled executable con
 
 ![](https://i.imgur.com/6YWoMGk.png)
 
+#### **!!! OUTDATED !!!**
+
+[Please use AMI_UCP_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
+
 #### **Description**
 
 Parses AMI UCP (Utility Configuration Program) BIOS images, extracts their SPI/BIOS/UEFI firmware components and shows all relevant info. It supports all AMI UCP revisions and formats, including those with nested AMI UCP or Insyde SFX structures. The output comprises only final firmware components and utilities which are directly usable by end users.
@@ -153,6 +161,10 @@ Some Anti-Virus software may claim that the built/frozen/compiled executable con
 
 ![](https://i.imgur.com/p0rrlqv.png)
 
+#### **!!! OUTDATED !!!**
+
+[Please use AMI_PFAT_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
+
 #### **Description**
 
 Parses AMI BIOS Guard (a.k.a. PFAT, Platform Firmware Armoring Technology) images, extracts their SPI/BIOS/UEFI firmware components and decompiles the Intel BIOS Guard Scripts. It supports all AMI PFAT revisions and formats, including those with nested AMI PFAT structures. The output comprises only final firmware components which are directly usable by end users.
@@ -210,6 +222,10 @@ Some Anti-Virus software may claim that the built/frozen/compiled executable con
 ## **Phoenix SCT BIOS Extractor**
 
 ![](https://i.imgur.com/z4VM06J.png)
+
+#### **!!! OUTDATED !!!**
+
+[Please use Phoenix_TDK_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
 
 #### **Description**
 
@@ -322,6 +338,10 @@ Some Anti-Virus software may claim that the built/frozen/compiled executable con
 ## **Portwell EFI BIOS Extractor**
 
 ![](https://i.imgur.com/ySdUSgf.png)
+
+#### **!!! OUTDATED !!!**
+
+[Please use Portwell_EFI_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
 
 #### **Description**
 
@@ -642,6 +662,10 @@ Some Anti-Virus software may claim that the built/frozen/compiled executable con
 
 ![](https://i.imgur.com/rg4xrxJ.png)
 <sub><sup>*Icon owned by VAIO*</sup></sub>
+
+#### **!!! OUTDATED !!!**
+
+[Please use VAIO_Package_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
 
 #### **Description**
 
