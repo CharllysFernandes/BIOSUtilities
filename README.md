@@ -13,7 +13,7 @@
 * [**VAIO Packaging Manager Extractor**](#vaio-packaging-manager-extractor) [use VAIO_Package_Extract from refactor branch]
 * [**Fujitsu UPC BIOS Extractor**](#fujitsu-upc-bios-extractor)
 * [**Fujitsu SFX BIOS Extractor**](#fujitsu-sfx-bios-extractor)
-* [**Award BIOS Module Extractor**](#award-bios-module-extractor)
+* [**Award BIOS Module Extractor**](#award-bios-module-extractor) [use Award_BIOS_Extract from refactor branch]
 * [**Apple EFI Package Grabber**](#apple-efi-package-grabber)
 * [**Apple EFI File Renamer**](#apple-efi-file-renamer)
 * [**Apple EFI IM4P Splitter**](#apple-efi-im4p-splitter)
@@ -21,15 +21,11 @@
 
 ## **Dell PFS Update Extractor**
 
-![](https://i.imgur.com/5WaGPPl.png)
-
 #### **!!! OUTDATED !!!**
 
 [Please use Dell_PFS_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
 
 ## **AMI UCP BIOS Extractor**
-
-![](https://i.imgur.com/6YWoMGk.png)
 
 #### **!!! OUTDATED !!!**
 
@@ -37,15 +33,11 @@
 
 ## **AMI BIOS Guard Extractor**
 
-![](https://i.imgur.com/p0rrlqv.png)
-
 #### **!!! OUTDATED !!!**
 
 [Please use AMI_PFAT_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
 
 ## **Phoenix SCT BIOS Extractor**
-
-![](https://i.imgur.com/z4VM06J.png)
 
 #### **!!! OUTDATED !!!**
 
@@ -108,8 +100,6 @@ Some Anti-Virus software may claim that the built/frozen/compiled executable con
 ![](https://i.imgur.com/Pn4JNiG.png)
 
 ## **Portwell EFI BIOS Extractor**
-
-![](https://i.imgur.com/ySdUSgf.png)
 
 #### **!!! OUTDATED !!!**
 
@@ -312,17 +302,11 @@ Some Anti-Virus software may claim that the built/frozen/compiled executable con
 
 ## **Panasonic BIOS Update Extractor**
 
-![](https://i.imgur.com/uZAoMGR.png)
-<sub><sup>*Icon owned by Panasonic*</sup></sub>
-
 #### **!!! OUTDATED !!!**
 
 [Please use Panasonic_BIOS_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
 
 ## **VAIO Packaging Manager Extractor**
-
-![](https://i.imgur.com/rg4xrxJ.png)
-<sub><sup>*Icon owned by VAIO*</sup></sub>
 
 #### **!!! OUTDATED !!!**
 
@@ -434,46 +418,6 @@ Some Anti-Virus software may claim that the built/frozen/compiled executable con
 
 ## **Award BIOS Module Extractor**
 
-#### **Description**
+#### **!!! OUTDATED !!!**
 
-Parses Award BIOS images and extracts their modules. The utility automatically uses [Igor Pavlov's 7-Zip](https://www.7-zip.org/) tool in order to decompress the initially LZH compressed sub-modules.
-
-#### **Usage**
-
-You can either Drag & Drop or manually enter the full path of a folder containing Award BIOS firmware.
-
-#### **Download**
-
-An already built/frozen/compiled binary is provided by me for Windows only. Thus, **you don't need to manually build/freeze/compile it under Windows**. Instead, download the latest version from the [Releases](https://github.com/platomav/BIOSUtilities/releases) tab. To extract the already built/frozen/compiled archive, you need to use programs which support RAR5 compression. Note that you need to manually apply any prerequisites.
-
-#### **Compatibility**
-
-Should work at all Windows, Linux or macOS operating systems which have Python 3.7 support. Windows users who plan to use the already built/frozen/compiled binary must make sure that they have the latest Windows Updates installed which include all required "Universal C Runtime (CRT)" libraries.
-
-#### **Prerequisites**
-
-To run the python script or its built/frozen/compiled binary, you need to have the following 3rd party tool at the same directory:
-
-* [7-Zip Console](https://www.7-zip.org/) (i.e. 7z.exe)
-
-#### **Build/Freeze/Compile with PyInstaller**
-
-PyInstaller can build/freeze/compile the utility at all three supported platforms, it is simple to run and gets updated often.
-
-1. Make sure Python 3.7.0 or newer is installed:
-
-> python --version
-
-2. Use pip to install PyInstaller:
-
-> pip3 install pyinstaller
-
-3. Build/Freeze/Compile:
-
-> pyinstaller --noupx --onefile Award_BIOS_Extract.py
-
-At dist folder you should find the final utility executable
-
-#### **Anti-Virus False Positives**
-
-Some Anti-Virus software may claim that the built/frozen/compiled executable contains viruses. Any such detections are false positives, usually of PyInstaller. You can switch to a better Anti-Virus software, report the false positive to their support, add the executable to the exclusions, build/freeze/compile yourself or use the Python script directly.
+[Please use Award_BIOS_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
