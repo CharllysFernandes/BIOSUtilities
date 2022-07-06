@@ -7,7 +7,7 @@
 * [**AMI UCP BIOS Extractor**](#ami-ucp-bios-extractor) [use AMI_UCP_Extract from refactor branch]
 * [**AMI BIOS Guard Extractor**](#ami-bios-guard-extractor) [use AMI_PFAT_Extract from refactor branch]
 * [**Phoenix SCT BIOS Extractor**](#phoenix-sct-bios-extractor) [use Phoenix_TDK_Extract from refactor branch]
-* [**Insyde iFlash Image Extractor**](#insyde-iflash-image-extractor) [use Insyde_iFlash_Extract from refactor branch]
+* [**Insyde iFlash Image Extractor**](#insyde-iflash-image-extractor) [use Insyde_IFD_Extract from refactor branch]
 * [**Portwell EFI BIOS Extractor**](#portwell-efi-bios-extractor) [use Portwell_EFI_Extract from refactor branch]
 * [**Panasonic BIOS Update Extractor**](#panasonic-bios-update-extractor) [use Panasonic_BIOS_Extract from refactor branch]
 * [**VAIO Packaging Manager Extractor**](#vaio-packaging-manager-extractor) [use VAIO_Package_Extract from refactor branch]
@@ -47,7 +47,7 @@
 
 #### **!!! OUTDATED !!!**
 
-[Please use Insyde_iFlash_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
+[Please use Insyde_IFD_Extract from refactor branch](https://github.com/platomav/BIOSUtilities/tree/refactor)
 
 ## **Portwell EFI BIOS Extractor**
 
