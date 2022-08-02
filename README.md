@@ -75,7 +75,7 @@ Should work at all Windows, Linux or macOS operating systems which have Python 3
 
 To run the python script, you need to have the following 3rd party Python module installed:
 
-* [pefile](https://pypi.org/project/urllib3/)
+* [urllib3](https://pypi.org/project/urllib3/)
 
 > pip3 install urllib3
 
