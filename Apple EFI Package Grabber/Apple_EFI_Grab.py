@@ -7,7 +7,7 @@ Apple EFI Package Grabber
 Copyright (C) 2018-2022 Plato Mavropoulos
 """
 
-title = 'Apple EFI Package Grabber v2.1'
+title = 'Apple EFI Package Grabber v2.3'
 
 print('\n' + title)
 
@@ -35,19 +35,34 @@ sys.excepthook = show_exception_and_exit
 
 import urllib3
 import datetime
-from multiprocessing.pool import ThreadPool
 
 def fetch_cat_info(name):
     url = cat_url[:-len('others/')] + name if name in ['index.sucatalog','index-1.sucatalog'] else cat_url + name
     
-    mod = urllib3.PoolManager().request('HEAD', url, retries=10).headers['Last-Modified']
+    for retry_index in range(retry_count):
+        try:
+            mod = urllib3.PoolManager().request('HEAD', url, retries=retry_count).headers['Last-Modified']
+            break
+        except:
+            print(f'Failed to fetch {url} info, attempt {retry_index + 1:02d}/{retry_count:02d}!')
+            continue
+    else:
+        raise Exception(f'Could not fetch {url} info after {retry_count} attempts!')
     
     return name, url, mod
 
 def fetch_cat_links(cat_file):
     cat_links = []
     
-    fdata = urllib3.PoolManager().request('GET', cat_file[1], retries=10).data
+    for retry_index in range(retry_count):
+        try:
+            fdata = urllib3.PoolManager().request('GET', cat_file[1], retries=retry_count).data
+            break
+        except:
+            print(f'Failed to fetch {cat_file} data, attempt {retry_index + 1:02d}/{retry_count:02d}!')
+            continue
+    else:
+        raise Exception(f'Could not fetch {cat_file} data after {retry_count} attempts!')
     
     cat_lines = [l.strip() for l in fdata.decode('utf-8','ignore').split('\n')]
     
@@ -64,8 +79,8 @@ dat_db = 'Apple_EFI_Grab.dat'
 cat_url = 'https://swscan.apple.com/content/catalogs/others/'
 apple_cat = []
 down_links = []
-svr_date = None
-thread_num = 1
+server_date = None
+retry_count = 10
 
 with open(dat_db, 'r', encoding='utf-8') as dat: db_lines = dat.readlines()
 db_lines = [line.strip('\n') for line in db_lines]
@@ -80,28 +95,28 @@ if not db_sucat:
     input('\nError: Failed to retrieve Catalogs from DB!\n\nDone!')
     sys.exit(1)
 
-apple_mod = ThreadPool(thread_num).imap_unordered(fetch_cat_info, db_sucat)
+apple_mod = [fetch_cat_info(sucat) for sucat in db_sucat]
 
 for name,url,mod in apple_mod:
     dt = datetime.datetime.strptime(mod, '%a, %d %b %Y %H:%M:%S %Z')
-    if not svr_date or dt > svr_date : svr_date = dt
+    if not server_date or dt > server_date : server_date = dt
     
     apple_cat.append((name, url, dt))
 
-if not svr_date:
+if not server_date:
     input('\nError: Failed to retrieve Current Catalog Datetime!\n\nDone!')
     sys.exit(1)
 
 print('\n    Previous Catalog Datetime :', db_date)
-print('    Current Catalog Datetime  :', svr_date)
+print('    Current Catalog Datetime  :', server_date)
 
-if svr_date <= db_date:
+if server_date <= db_date:
     input('\nNothing new since %s!\n\nDone!' % db_date)
     sys.exit()
 
 print('\nGetting Catalog Links...')
 
-down_links = ThreadPool(thread_num).imap_unordered(fetch_cat_links, apple_cat)
+down_links = [fetch_cat_links(cat) for cat in apple_cat]
 
 down_links = [item for sublist in down_links for item in sublist]
 
@@ -112,19 +127,19 @@ if not down_links:
 new_links = sorted(list(dict.fromkeys([link for link in down_links if link not in db_links])))
 
 if new_links:
-    print('\nFound %d new link(s) between %s and %s!' % (len(new_links), db_date, svr_date))
+    print('\nFound %d new link(s) between %s and %s!' % (len(new_links), db_date, server_date))
     
     cur_date = datetime.datetime.utcnow().isoformat(timespec='seconds').replace('-','').replace('T','').replace(':','') # Local UTC Unix
     
     with open('Apple_%s.txt' % cur_date, 'w', encoding='utf-8') as lout: lout.write('\n'.join(map(str, new_links)))
 else:
-    print('\nThere are no new links between %s and %s!' % (db_date, svr_date))
+    print('\nThere are no new links between %s and %s!' % (db_date, server_date))
 
 new_db_sucat = '\n'.join(map(str, db_sucat))
 
-new_db_links = '\n'.join(map(str, sorted(list(dict.fromkeys(down_links)))))
+new_db_links = '\n'.join(map(str, sorted(list(dict.fromkeys(down_links + list(db_links))))))
 
-new_db_lines = '%s\n\n%s\n\n%s' % (svr_date, new_db_sucat, new_db_links)
+new_db_lines = '%s\n\n%s\n\n%s\n' % (server_date, new_db_sucat, new_db_links)
 
 with open(dat_db, 'w', encoding='utf-8') as dbout: dbout.write(new_db_lines)
 
